@@ -1,0 +1,2 @@
+credit_note_id,line_id,source_invoice_id,product_id,customer_id,order_id,quantity,unit_price,reason_text,po_reference
+CR1,1,INV1,P1,C1,O1,1,100,test,PO-1

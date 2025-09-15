@@ -1,0 +1,15 @@
+
+services:
+  creditnote-doctor:
+    build: ../
+    ports:
+      - "8501:8501"
+    environment:
+      - ENV=prod
+      - DATA_DIR=/data
+      - REPORT_DIR=/reports
+      - INDEX_DIR=/indexes
+    volumes:
+      - ../data:/data
+      - ../reports:/reports
+      - ../indexes:/indexes

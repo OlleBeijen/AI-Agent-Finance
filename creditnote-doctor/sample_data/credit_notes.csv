@@ -1,0 +1,5 @@
+credit_note_id,line_id,source_invoice_id,product_id,customer_id,order_id,quantity,unit_price,reason_text,po_reference
+CR001,1,INV001,P001,C001,O001,10,90.0,Prijs te hoog,PO-1001
+CR001,2,INV001,P002,C001,O001,4,50.0,Te veel gefactureerd,PO-1001
+CR002,1,INV002,P001,C002,O002,8,95.0,Te late levering,PO-2201
+CR003,1,,P003,C003,O003,12,25.0,PO ontbreekt,

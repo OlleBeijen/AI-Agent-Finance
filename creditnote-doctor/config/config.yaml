@@ -1,0 +1,20 @@
+
+env: ${ENV:dev}
+paths:
+  data: ${DATA_DIR:./data}
+  reports: ${REPORT_DIR:./reports}
+  indexes: ${INDEX_DIR:./indexes}
+analysis:
+  currency: EUR
+  price_tolerance_pct: 1.0   # afwijking in % voor prijs mismatch
+  delivery_tolerance_days: 1 # dagen tolerantie rond leverdatum
+  top_k_patterns: 5
+rag:
+  use_llm: false
+  provider: openai
+  model: ${MODEL_NAME:gpt-4o-mini}
+  max_chunks: 50
+  top_k: 5
+security:
+  pii_masking: true
+  hash_salt: "change-me"
