@@ -1,4 +1,12 @@
 
+import sys
+from pathlib import Path
+
+# van app/pages/ naar projectroot (met 'src/') is twee niveaus omhoog
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import streamlit as st
 from src.utils.io import save_uploaded_file
 from src.config import AppConfig

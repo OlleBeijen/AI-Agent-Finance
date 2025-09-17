@@ -12,8 +12,30 @@ def detect_root_causes(data: dict, cfg: AppConfig) -> pd.DataFrame:
         df.columns = [c.lower() for c in df.columns]
 
     # Baseline joins
-    merged = credit.merge(inv, left_on=["source_invoice_id","product_id","customer_id"], right_on=["invoice_id","product_id","customer_id"], how="left", suffixes=("_cred","_inv"))
-    merged = merged.merge(orders, left_on=["order_id","product_id"], right_on=["order_id","product_id"], how="left", suffixes=("","_ord"))
+    merged = credit.merge(
+        inv,
+        left_on=["source_invoice_id", "product_id", "customer_id"],
+        right_on=["invoice_id", "product_id", "customer_id"],
+        how="left",
+        suffixes=("_cred", "_inv"),
+    )
+
+    # Na de eerste merge kan order_id uit creditnota's hernoemd zijn naar order_id_cred
+    if "order_id" not in merged.columns:
+        if "order_id_cred" in merged.columns:
+            merged["order_id"] = merged["order_id_cred"]
+        elif "order_id_inv" in merged.columns:
+            merged["order_id"] = merged["order_id_inv"]
+        else:
+            merged["order_id"] = None
+
+    merged = merged.merge(
+        orders,
+        left_on=["order_id", "product_id"],
+        right_on=["order_id", "product_id"],
+        how="left",
+        suffixes=("", "_ord"),
+    )
 
     # Heuristieken
     tol_pct = float(cfg.analysis.get("price_tolerance_pct", 1.0))
