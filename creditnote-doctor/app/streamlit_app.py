@@ -1,4 +1,12 @@
 
+import sys
+from pathlib import Path
+
+# Zorg dat projectroot (met 'src/') in sys.path staat wanneer de app vanuit app/ draait
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import streamlit as st
 from src.config import AppConfig
 from src.agent.agent import CreditnoteDoctorAgent
